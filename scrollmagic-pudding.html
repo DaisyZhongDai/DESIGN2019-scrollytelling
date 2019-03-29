@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Scrollytelling demo: ScrollMagic.js</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<link rel='stylesheet' href='./css/re-style.css' />
+	<link rel='stylesheet' href='graphic.css' />
+</head>
+<body>
+<header>
+	<a href="https://pudding.cool" target="_blank" class="logo">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 111 40"><defs><style>.cls-1{fill:#f7f8f7;}.cls-2{fill:#f55c2f;}</style></defs>
+				<title id="logo__title">ZiHao ScrollMagic</title>
+				<g id="图层_1" data-name="图层 1"><rect x="-0.11" width="111.11" height="40" rx="4" ry="4"/><polygon class="cls-1" points="35.56 15.73 35.56 6.22 28.92 6.22 28.92 32.99 35.56 32.99 35.56 22.37 42.2 22.37 42.2 15.73 35.56 15.73"/><path class="cls-1" d="M18.21,6.22v9.51H7.49V33h5.37v0H19.5v0h5.35V6.22Zm.58,21.11h-5.6V21.79h5.6Z"/><rect class="cls-2" x="39.67" y="26.36" width="6.64" height="6.64"/><path class="cls-1" d="M55.46,20.67v-7h2.39v7.72a25.41,25.41,0,0,1-.34,4.56C59.11,27.37,62,30,63.1,31.07l-2,2c-1-1.08-3-3-4.5-4.5-.94,1.77-2.51,3.22-5,5.16l-1.93-2C54.43,28.48,55.46,26.43,55.46,20.67Zm6.44-11V25.77H59.39V12.38h-5.5v13.7h-2.5V9.64Zm7.41,6.47H63V13.37h7.21V8.3H73v5.07H75.9v2.74H73V29.65c0,2.76-.89,3.53-3.93,3.53H66l-.6-2.76h2.85c1.65,0,2-.37,2-1.86V19.9a36.38,36.38,0,0,1-7.29,9L61,26.82A32.93,32.93,0,0,0,69.31,16.11Z"/><path class="cls-1" d="M77.21,32.13l-.35-2.74c1-.09,8-1.25,9-1.45L86,29.13l.08,1.6C84.9,30.87,78.32,32,77.21,32.13Zm2.11-9.58a44,44,0,0,0,2.73-3.82c-1.2.09-2.65.17-3.22.23l-1.11.11-.63-2.56a2.21,2.21,0,0,0,1.06-.83,42.65,42.65,0,0,0,4.07-7.35l2.48,1a33.89,33.89,0,0,1-4,6.92c.49,0,2-.08,3-.14C84.39,15,85,14,85.53,13l2.34,1.2A67.54,67.54,0,0,1,82,23c1.14-.18,3.91-.57,4.62-.72l0,2.77c-.57.05-5.27.68-6.75.91-.55.09-1,.17-1.49.28l-.65-2.67A2.64,2.64,0,0,0,79.32,22.55Zm17.52-10H87.78V9.81h12.85v2.57a27.16,27.16,0,0,1-3.56,3.7c2.08,1.11,4.79,2.59,6.33,3.51L101.8,22c-1.91-1.17-4.87-2.94-7-4.14a34.81,34.81,0,0,1-7.32,4.17L86,19.59C89.86,17.93,94.53,15.17,96.84,12.55Zm4.36,9.86v2.7H95.9v4.82h6.84v2.65H86.44V29.93H93.2V25.11H87.92v-2.7Z"/></g>
+			</svg>
+	</a>
+</header>
+	<main>
+
+		<div class='library'>
+			<h2 class='library__hed'><a target='_blank' href='http://scrollmagic.io/ '>ScrollMagic</a></h2>
+			<div class='library__graphic graphic'>
+				<div class='graphic__prose'>
+					<p class='trigger' data-step='0'>Step 1 in the graphic. It triggers in the middle of the viewport. For this graphic, it is the same as the initial state so the reader doesn&rsquo;t miss anything.</p>
+					<p class='trigger' data-step='1'>Step 2 arrives. The graphic should be locking into a fixed position right about now. We could have a whole bunch of these &ldquo;fixed&rdquo; steps.</p>
+					<p class='trigger' data-step='2'>Step 3 concludes our brief tour. The graphic should now go back to its original in-flow position, elegantly snapping back into place.</p>
+				</div>
+				<div class='graphic__vis'></div>
+			</div>
+			<p class='back-to-blog'><a href='../../#scrollmagic'>&larr; Back to the blog</a></p>
+			<div class="conyent2">
+				<img src="img/画板 77 副本 42.jpg" alt="">
+			</div>
+		</div>
+
+		
+	</main>
+
+	<!-- for the graphic -->
+	<script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+	<script src='graphic.js'></script>
+
+	<!-- The scroll library -->
+	<!-- http://scrollmagic.io/ -->
+	<script src='./lib/ScrollMagic.min.js'></script>
+	
+	
+	<script>
+		(function() {
+
+			// helper function so we can map over dom selection
+			function selectionToArray(selection) {
+				var len = selection.length
+				var result = []
+				for (var i = 0; i < len; i++) {
+					result.push(selection[i])
+				}
+				return result
+			}
+
+			function scrollmagic() {
+				// select elements
+				var graphicEl = document.querySelector('.graphic')
+				var graphicVisEl = graphicEl.querySelector('.graphic__vis')
+				var triggerEls = selectionToArray(graphicEl.querySelectorAll('.trigger'))
+
+				// viewport height
+				var viewportHeight = window.innerHeight
+				var halfViewportHeight = Math.floor(viewportHeight / 2)
+
+				// a global function creates and handles all the vis + updates
+				var graphic = createGraphic('.graphic')
+
+				// handle the fixed/static position of grahpic
+				var toggle = function(fixed, bottom) {
+					if (fixed) graphicVisEl.classList.add('is-fixed')
+					else graphicVisEl.classList.remove('is-fixed')
+
+					if (bottom) graphicVisEl.classList.add('is-bottom')
+					else graphicVisEl.classList.remove('is-bottom')
+				}
+
+				// init controller
+				var controller = new ScrollMagic.Controller()
+				
+				// setup a scrollmagic trigger ("scene") for each trigger element
+				var scenes = triggerEls.map(function(el) {
+					// get the step, cast as number					
+					var step = +el.getAttribute('data-step')
+
+					var scene = new ScrollMagic.Scene({
+						triggerElement: el, // our trigger element
+						triggerHook: 'onCenter', // 0.5, defaults to this
+						// duration: el.offsetHeight, // how long it lasts for (in pixels)
+					})
+
+					scene
+						.on('enter', function(event) {
+							// tell our graphic to update with a specific step
+							graphic.update(step)
+						})
+						.on('leave', function(event) {
+							var nextStep = Math.max(0, step - 1)
+							graphic.update(nextStep)
+						})
+					
+					// add it to controller so it actually fires
+					scene.addTo(controller)
+				})
+
+				// create a scene to toggle fixed position
+				var enterExitScene = new ScrollMagic.Scene({
+					triggerElement: graphicEl,
+					triggerHook: '0',
+					duration: graphicEl.offsetHeight - viewportHeight,
+				})
+
+				enterExitScene
+					.on('enter', function(event) {
+						var fixed = true
+						var bottom = false
+						toggle(fixed, bottom)
+					})
+					.on('leave', function(event) {
+						var fixed = false
+						var bottom = event.scrollDirection === 'FORWARD'
+						toggle(fixed, bottom)
+					})
+
+				enterExitScene.addTo(controller)
+			}
+
+			scrollmagic()
+
+		})()
+	</script>
+</body>
+</html>
